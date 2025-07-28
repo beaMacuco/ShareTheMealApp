@@ -9,17 +9,13 @@ import SwiftUI
 
 struct OverlayHeaderImageView: View {
     let title: String
-    let imageUrl: URL?
+    let image: Image
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
-            if let url = imageUrl {
-                AsyncImage(url: url) { result in
-                    result.image?
-                        .resizable()
-                        .scaledToFill()
-                }
-            }
+            image
+                .resizable()
+                .scaledToFill()
             Text(title)
                 .foregroundStyle(.white)
                 .padding(ViewSpacing.four)
@@ -29,5 +25,5 @@ struct OverlayHeaderImageView: View {
 }
 
 #Preview {
-    OverlayHeaderImageView(title: "Food donation program", imageUrl: URL(string: "www.test.com"))
+    OverlayHeaderImageView(title: "Food donation program", image: Image("ImagePlaceholder"))
 }

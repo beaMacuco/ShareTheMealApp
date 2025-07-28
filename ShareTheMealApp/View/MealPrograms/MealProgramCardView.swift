@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct MealProgramCardView: View {
-    let mealProgram: MealProgram
+    @ObservedObject var viewModel: MealProgramItemViewModel
     
     var body: some View {
         CardView {
-            OverlayHeaderImageView(title: mealProgram.name, imageUrl: mealProgram.programImageUrl)
-            
+            OverlayHeaderImageView(title: viewModel.mealProgram.name, image: viewModel.programImage)
             VStack(alignment: .leading, spacing: ViewSpacing.twelve) {
-                TagsView(tags: mealProgram.tags)
-                ProgramProgressView(mealProgram: mealProgram)
+                TagsView(tags: viewModel.mealProgram.tags)
+                ProgramProgressView(mealProgram: viewModel.mealProgram)
             }
             .padding(EdgeInsets(top: ViewSpacing.zero, leading: ViewSpacing.sixteen, bottom: ViewSpacing.sixteen, trailing: ViewSpacing.sixteen))
         }
@@ -24,5 +23,5 @@ struct MealProgramCardView: View {
 }
 
 #Preview {
-    MealProgramCardView(mealProgram: MealProgram.fake())
+    MealProgramCardView(viewModel: MealProgramItemViewModel(mealProgram: MealProgram.fake()))
 }
