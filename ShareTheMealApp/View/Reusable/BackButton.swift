@@ -12,6 +12,9 @@ struct BackButton: View {
     
     var body: some View {
         IconButton(iconName: SFSymbols.arrowLeft, action: action)
+            .foregroundStyle(.black)
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.capsule)
     }
 }
 

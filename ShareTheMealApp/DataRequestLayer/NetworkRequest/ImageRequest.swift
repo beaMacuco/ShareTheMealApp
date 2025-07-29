@@ -19,7 +19,7 @@ protocol ImageRequesting {
     func fetchImage(urlString: String) async throws -> Data
 }
 
-class ImageRequest: ImageRequesting {
+final class ImageRequest: ImageRequesting {
     private let successStatusCodeRange = 200..<300
     private let urlSession: URLSession
     

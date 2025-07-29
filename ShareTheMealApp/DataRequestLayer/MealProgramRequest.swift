@@ -12,8 +12,7 @@ protocol MealProgramRequestable {
 }
 
 final class MealProgramRequest: MealProgramRequestable {
-    private let pageSize = 10
-    private var offset = 0
+    private let pageSize = 4
     private let mealProgramLocalJsonReader: MealProgramLocalJsonReader
     
     init(mealProgramLocalJsonReader: MealProgramLocalJsonReader = MealProgramLocalJsonReader()) {
@@ -29,12 +28,6 @@ final class MealProgramRequest: MealProgramRequestable {
             return []
         }
         return mealProgramLocalJsonReader.filterPrograms(query: query)
-    }
-    
-    func fetchMoreItems() ->  [MealProgram] {
-        let nextItems = fetchPage(offset: offset)
-        offset += nextItems.count
-        return nextItems
     }
     
     func fetchPage(offset: Int) -> [MealProgram] {

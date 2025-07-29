@@ -12,7 +12,7 @@ protocol ImageCaching {
     func persist(image: UIImage, by reference: String)
 }
 
-class ImageCache: ImageCaching {
+final class ImageCache: ImageCaching {
     private let cache: NSCache<NSString, UIImage>
     
     init(cache: NSCache<NSString, UIImage> = NSCache<NSString, UIImage>()) {

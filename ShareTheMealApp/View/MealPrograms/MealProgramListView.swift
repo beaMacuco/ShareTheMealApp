@@ -10,19 +10,40 @@ import SwiftUI
 struct MealProgramListView: View {
     @StateObject private var viewModel = MealProgramsViewModel()
     
-    var body: some View {
-        NavigationStack {
-            ScrollView(.vertical) {
+    @ViewBuilder
+    private var viewState: some View {
+        switch viewModel.viewState {
+        case .loading:
+            ProgressView()
+        case .error(let error):
+            Text(error)
+        default:
+            EmptyView()
+        }
+    }
+    
+    @ViewBuilder
+    private var mealProgramList: some View {
+        ScrollView(.vertical) {
+            LazyVStack {
                 ForEach(viewModel.filteredMealPrograms, id: \.self) { item in
                     MealProgramListItemView(mealProgram: item)
-                        .onAppear {
+                        .task(id: item.id) {
                             viewModel.fetchMoreIfNeeded(currentItem: item)
                         }
                 }
             }
-            .searchable(text: $viewModel.searchText)
-            .onAppear() {
-                viewModel.loadInitialData()
+        }
+        .searchable(text: $viewModel.searchText)
+    }
+    
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                mealProgramList
+                .opacity(viewModel.viewState == .loaded ? ViewOpacity.one : ViewOpacity.zero)
+    
+                viewState
             }
             .navigationTitle("Meal Programs")
         }

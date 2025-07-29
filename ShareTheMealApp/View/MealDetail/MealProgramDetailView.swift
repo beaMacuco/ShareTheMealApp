@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//If i had more time I would add an animation like in the main app to show the inline navbar when the user scrolls passed the image.
+// TODO: If i had more time I would add an animation like in the main app to show the inline navbar when the user scrolls passed the image.
 struct MealProgramDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var viewModel: MealProgramItemViewModel
@@ -32,9 +32,12 @@ struct MealProgramDetailView: View {
                 }
                 
                 PrimaryButton(title: "Donate now") {
-                    
+                    viewModel.showAlert = true
                 }
                 .padding(ViewSpacing.sixteen)
+            }
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(title: Text("We have received your donation"), message: Text("Thank you for your interest :)"), dismissButton: .default(Text("OK")))
             }
         }
         .toolbar {
