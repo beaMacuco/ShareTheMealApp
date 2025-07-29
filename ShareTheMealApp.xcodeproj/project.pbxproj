@@ -29,9 +29,30 @@
 		4F6B328E2E2FF46D00054107 /* ShareTheMealAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShareTheMealAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4FB6DE042E3934CC00BEB04A /* Exceptions for "ShareTheMealApp" folder in "ShareTheMealAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Cache/ImageCache.swift,
+				DataRequestLayer/DataDecoder.swift,
+				DataRequestLayer/LocalJsonReader.swift,
+				DataRequestLayer/MealProgramLocalJsonReader.swift,
+				DataRequestLayer/MealProgramRequest.swift,
+				DataRequestLayer/NetworkRequest/ImageRequest.swift,
+				Model/MealProgram.swift,
+				Model/MealPrograms.swift,
+				Utilities/LocalFileReader.swift,
+			);
+			target = 4F6B32832E2FF46D00054107 /* ShareTheMealAppTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4F6B32792E2FF46D00054107 /* ShareTheMealApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4FB6DE042E3934CC00BEB04A /* Exceptions for "ShareTheMealApp" folder in "ShareTheMealAppTests" target */,
+			);
 			path = ShareTheMealApp;
 			sourceTree = "<group>";
 		};
@@ -178,11 +199,9 @@
 					};
 					4F6B32832E2FF46D00054107 = {
 						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 4F6B32762E2FF46D00054107;
 					};
 					4F6B328D2E2FF46D00054107 = {
 						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 4F6B32762E2FF46D00054107;
 					};
 				};
 			};
@@ -451,38 +470,34 @@
 		4F6B329C2E2FF46D00054107 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2D26LWTJ73;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = bea.ShareTheMealAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ShareTheMealApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ShareTheMealApp";
 			};
 			name = Debug;
 		};
 		4F6B329D2E2FF46D00054107 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2D26LWTJ73;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = bea.ShareTheMealAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ShareTheMealApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ShareTheMealApp";
 			};
 			name = Release;
 		};
@@ -493,13 +508,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2D26LWTJ73;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = bea.ShareTheMealAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ShareTheMealApp;
 			};
 			name = Debug;
 		};
@@ -510,13 +526,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2D26LWTJ73;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = bea.ShareTheMealAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ShareTheMealApp;
 			};
 			name = Release;
 		};

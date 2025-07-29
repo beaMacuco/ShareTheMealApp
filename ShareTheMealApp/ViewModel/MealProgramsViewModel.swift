@@ -24,12 +24,11 @@ final class MealProgramsViewModel: ObservableObject {
     @Published var isSearching: Bool = false
     @Published private(set) var filteredMealPrograms: [MealProgram] = []
     @Published var shouldSearchMeals: Bool = false
-    @Published var viewState: ViewState
+    @Published var viewState: ViewState = .none
     @Published private(set) var visibleMealPrograms: [MealProgram] = []
     
     init(mealProgramRequest: MealProgramRequest = MealProgramRequest()) {
         self.mealProgramRequest = mealProgramRequest
-        viewState = .none
         addObservers()
         loadInitialData()
     }
@@ -39,7 +38,6 @@ final class MealProgramsViewModel: ObservableObject {
         Task {
             do {
                 try await mealProgramRequest.loadMealPrograms()
-                offset = 0
                 visibleMealPrograms = mealProgramRequest.fetchPage(offset: offset)
                 offset += visibleMealPrograms.count
                 filteredMealPrograms = visibleMealPrograms

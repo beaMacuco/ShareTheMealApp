@@ -12,11 +12,12 @@ protocol MealProgramRequestable {
 }
 
 final class MealProgramRequest: MealProgramRequestable {
-    private let pageSize = 4
-    private let mealProgramLocalJsonReader: MealProgramLocalJsonReader
+    private let pageSize: Int
+    private let mealProgramLocalJsonReader: MealProgramLocalJsonReadable
     
-    init(mealProgramLocalJsonReader: MealProgramLocalJsonReader = MealProgramLocalJsonReader()) {
+    init(mealProgramLocalJsonReader: MealProgramLocalJsonReadable = MealProgramLocalJsonReader(), pageSize: Int = 4) {
         self.mealProgramLocalJsonReader = mealProgramLocalJsonReader
+        self.pageSize = pageSize
     }
     
     func loadMealPrograms() async throws {
@@ -31,7 +32,8 @@ final class MealProgramRequest: MealProgramRequestable {
     }
     
     func fetchPage(offset: Int) -> [MealProgram] {
-        let end = min(offset + pageSize, mealProgramLocalJsonReader.mealPrograms.count)
+        let countAllPrograms = mealProgramLocalJsonReader.countPrograms()
+        let end = min(offset + pageSize, countAllPrograms)
         guard offset < end else {
             return []
         }

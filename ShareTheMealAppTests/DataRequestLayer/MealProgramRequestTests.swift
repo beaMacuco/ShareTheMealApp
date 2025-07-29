@@ -10,25 +10,53 @@ import XCTest
 
 final class MealProgramRequestTests: XCTestCase {
 
-    func test_GivenItemsToFetch_WhenFetched_ThenListOfItemsReturned() async throws {
-        let dataRetrievableMock = DataRequestableMock()
-        let sut = MealProgramRequest(dataRetrievable: dataRetrievableMock)
-        let expected = MealPrograms.fake().programs.first?.id
-        let items =  try await sut.fetchItems()
-        
-        XCTAssertEqual(items.first?.id, expected)
+    func test_GivenLoadMealProgramsCalled_ThenJsonMealProgramsLoaderIsCalled() async throws {
+        let localJsonReaderMock = LocalJsonReaderMock()
+        let sut = MealProgramRequest(mealProgramLocalJsonReader: localJsonReaderMock)
+        do {
+            try await sut.loadMealPrograms()
+            XCTAssertTrue(localJsonReaderMock.isLoaded)
+        } catch {
+            XCTFail("Should call meal programs loader")
+        }
     }
     
-    func test_GivenItemsToFetch_WhenFailed_ThenErrorIsThrown() async throws {
-        var dataRetrievableMock = DataRequestableMock()
-        dataRetrievableMock.shouldThrowError = true
-        let sut = MealProgramRequest(dataRetrievable: dataRetrievableMock)
+    func test_GivenSearchItems_WhenEmptyQuery_ThenEmptyArrayIsReturned() throws {
+        let localJsonReaderMock = LocalJsonReaderMock()
+        localJsonReaderMock.programs = [MealProgram.fake(), MealProgram.fake()]
+        let sut = MealProgramRequest(mealProgramLocalJsonReader: localJsonReaderMock)
+        let items = sut.searchItems(query: "")
         
-        do {
-            _ = try await sut.fetchItems()
-            XCTFail("Should throw file not found error")
-        } catch {
-            XCTAssertTrue(true)
-        }
+        XCTAssertTrue(items.isEmpty)
+    }
+    
+    func test_GivenSearchItems_WhenItemsForQueryExists_ThenItemsAreReturned() throws {
+        let localJsonReaderMock = LocalJsonReaderMock()
+        localJsonReaderMock.programs = [MealProgram.fake(), MealProgram.fake()]
+        let sut = MealProgramRequest(mealProgramLocalJsonReader: localJsonReaderMock)
+        let items = sut.searchItems(query: MealProgram.fake().name)
+        
+        XCTAssertTrue(items.count == localJsonReaderMock.programs.count)
+    }
+    
+    func test_GivenFetch_WhenEndOfListIsReached_ThenEmptyArrayReturned() throws {
+        let localJsonReaderMock = LocalJsonReaderMock()
+        localJsonReaderMock.programs = [MealProgram.fake(), MealProgram.fake()]
+        let count = 10
+        localJsonReaderMock.programCount = count
+        let sut = MealProgramRequest(mealProgramLocalJsonReader: localJsonReaderMock)
+        let items = sut.fetchPage(offset: count + 1)
+        
+        XCTAssertTrue(items.isEmpty)
+    }
+    
+    func test_GivenFetch_WhenEndOfListNotReached_ThenPageReturned() throws {
+        let localJsonReaderMock = LocalJsonReaderMock()
+        localJsonReaderMock.programs = [MealProgram.fake(), MealProgram.fake()]
+        localJsonReaderMock.programCount = 10
+        let sut = MealProgramRequest(mealProgramLocalJsonReader: localJsonReaderMock)
+        let items = sut.fetchPage(offset: 1)
+        
+        XCTAssertFalse(items.isEmpty)
     }
 }

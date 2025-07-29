@@ -11,6 +11,7 @@ protocol MealProgramLocalJsonReadable {
     func loadPrograms() throws
     func filterPrograms(query: String) -> [MealProgram]
     func fetchCurrentPage(offset: Int, end: Int) -> [MealProgram]
+    func countPrograms() -> Int
 }
 
 final class MealProgramLocalJsonReader: MealProgramLocalJsonReadable {
@@ -35,6 +36,10 @@ final class MealProgramLocalJsonReader: MealProgramLocalJsonReadable {
     
     func fetchCurrentPage(offset: Int, end: Int) -> [MealProgram] {
         Array(mealPrograms[offset..<end])
+    }
+    
+    func countPrograms() -> Int {
+        mealPrograms.count
     }
     
     private func fetchItems() throws -> [MealProgram] {

@@ -5,6 +5,7 @@
 //  Created by Beatriz Loures Macuco on 23.07.25.
 //
 
+
 struct CodableMock: Codable {
     let id: Int
     let name: String
