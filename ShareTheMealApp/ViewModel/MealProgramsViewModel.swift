@@ -10,41 +10,51 @@ import Combine
 
 /// Keeps track of the view state to be displayed in the view.
 enum ViewState: Equatable {
-    case none, loading, loaded, error(String)
+    case loading, loaded, error(String)
 }
 
 @MainActor
 final class MealProgramsViewModel: ObservableObject {
+    static let errorMessage: String = "Hey there! Something went wrong... 😬"
+    private var hasLoadedInitialData = false
     private let viewOffSet = 2
-    private var offset = 0
+    private(set) var offset = 0
     private var isFetching: Bool = false
-    let mealProgramRequest: MealProgramRequest
+    let mealProgramRequest: MealProgramRequestable
     private var cancellables = Set<AnyCancellable>()
     @Published var searchText: String = ""
     @Published var isSearching: Bool = false
     @Published private(set) var filteredMealPrograms: [MealProgram] = []
     @Published var shouldSearchMeals: Bool = false
-    @Published var viewState: ViewState = .none
+    @Published var viewState: ViewState = .loading
     @Published private(set) var visibleMealPrograms: [MealProgram] = []
     
-    init(mealProgramRequest: MealProgramRequest = MealProgramRequest()) {
+    init(mealProgramRequest: MealProgramRequestable = MealProgramRequest()) {
         self.mealProgramRequest = mealProgramRequest
         addObservers()
-        loadInitialData()
     }
     
-    func loadInitialData() {
-        viewState = .loading
-        Task {
-            do {
-                try await mealProgramRequest.loadMealPrograms()
+    func loadInitialDataIfNeeded() async {
+        guard !hasLoadedInitialData else {
+            return
+        }
+        await loadInitialData()
+        hasLoadedInitialData = true
+    }
+    
+    private func loadInitialData() async {
+        do {
+            try await mealProgramRequest.loadMealPrograms()
+            await MainActor.run {
                 visibleMealPrograms = mealProgramRequest.fetchPage(offset: offset)
                 offset += visibleMealPrograms.count
                 filteredMealPrograms = visibleMealPrograms
                 viewState = .loaded
-            } catch {
+            }
+        } catch {
+            await MainActor.run {
                 //TODO: would do much better error handling by checking "NetworkError".
-                viewState = .error("Hey there! Something went wrong... 😬")
+                viewState = .error(Self.errorMessage)
             }
         }
     }

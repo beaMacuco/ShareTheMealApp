@@ -46,6 +46,9 @@ struct MealProgramListView: View {
                 viewState
             }
             .navigationTitle("Meal Programs")
+            .task {
+                await viewModel.loadInitialDataIfNeeded()
+            }
         }
     }
 }

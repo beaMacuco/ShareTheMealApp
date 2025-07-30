@@ -42,6 +42,7 @@
 				Model/MealProgram.swift,
 				Model/MealPrograms.swift,
 				Utilities/LocalFileReader.swift,
+				ViewModel/MealProgramsViewModel.swift,
 			);
 			target = 4F6B32832E2FF46D00054107 /* ShareTheMealAppTests */;
 		};
