@@ -41,7 +41,7 @@ final class ImageLoader: ImageLoading {
             
         } catch {
             // In the case of an image request failure there is not much to show to the user so we just log this to see if there is a fix and continue presenting a placeholder to the user.
-//            print(error)
+            print(error)
         }
         return image
     }

@@ -37,7 +37,7 @@ struct MealProgram: Codable, Identifiable, Hashable {
 }
 
 extension MealProgram {
-    static func fake() -> MealProgram {
-        MealProgram(id: 1, name: "test program", country: "Germany", countryCode: "DE", description: "A food program", beneficiaries: 300, imageUrl: "test.com", location: "Berlin", status: "Done", goalAmount: 20, raisedAmount: 10, category: "food program", startDate: Date(), tags: ["test program", "Berlin"])
+    static func fake(id: Int = 1) -> MealProgram {
+        MealProgram(id: id, name: "test program", country: "Germany", countryCode: "DE", description: "A food program", beneficiaries: 300, imageUrl: "test.com", location: "Berlin", status: "Done", goalAmount: 20, raisedAmount: 10, category: "food program", startDate: Date(), tags: ["test program", "Berlin"])
     }
 }

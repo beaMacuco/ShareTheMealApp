@@ -12,6 +12,7 @@ final class DataDecoderTests: XCTestCase {
     var sut: DataDecoder!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = DataDecoder()
     }
 
