@@ -2,7 +2,6 @@
 //  MealProgramLocalJsonReader.swift
 //  ShareTheMealApp
 //
-//  Created by Beatriz Loures Macuco on 24.07.25.
 //
 
 import Foundation

@@ -2,7 +2,6 @@
 //  CodableMock.swift
 //  ShareTheMealApp
 //
-//  Created by Beatriz Loures Macuco on 23.07.25.
 //
 
 

@@ -30,10 +30,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4F60DB5E2E3BDCC8005869D0 /* Exceptions for "ShareTheMealApp" folder in "ShareTheMealAppUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				DependencyContainer.swift,
+			);
+			target = 4F6B328D2E2FF46D00054107 /* ShareTheMealAppUITests */;
+		};
 		4FB6DE042E3934CC00BEB04A /* Exceptions for "ShareTheMealApp" folder in "ShareTheMealAppTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Cache/ImageCache.swift,
+				Cache/ImageLoader.swift,
 				DataRequestLayer/DataDecoder.swift,
 				DataRequestLayer/LocalJsonReader.swift,
 				DataRequestLayer/MealProgramLocalJsonReader.swift,
@@ -42,6 +50,7 @@
 				Model/MealProgram.swift,
 				Model/MealPrograms.swift,
 				Utilities/LocalFileReader.swift,
+				ViewModel/MealProgramItemViewModel.swift,
 				ViewModel/MealProgramsViewModel.swift,
 			);
 			target = 4F6B32832E2FF46D00054107 /* ShareTheMealAppTests */;
@@ -53,6 +62,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				4FB6DE042E3934CC00BEB04A /* Exceptions for "ShareTheMealApp" folder in "ShareTheMealAppTests" target */,
+				4F60DB5E2E3BDCC8005869D0 /* Exceptions for "ShareTheMealApp" folder in "ShareTheMealAppUITests" target */,
 			);
 			path = ShareTheMealApp;
 			sourceTree = "<group>";

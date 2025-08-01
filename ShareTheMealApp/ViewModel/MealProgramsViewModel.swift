@@ -2,7 +2,6 @@
 //  MealProgramsViewModel.swift
 //  ShareTheMealApp
 //
-//  Created by Beatriz Loures Macuco on 22.07.25.
 //
 
 import SwiftUI
@@ -14,7 +13,15 @@ enum ViewState: Equatable {
 }
 
 @MainActor
-final class MealProgramsViewModel: ObservableObject {
+protocol MealProgramsViewModelProtocol: ObservableObject {
+    var viewState: ViewState { get set }
+    var filteredMealPrograms: [MealProgram] { get set }
+    var searchText: String { get set }
+    func loadInitialDataIfNeeded() async
+    func fetchMoreIfNeeded(currentItem: MealProgram)
+}
+
+final class MealProgramsViewModel: MealProgramsViewModelProtocol {
     static let errorMessage: String = "Hey there! Something went wrong... 😬"
     private var hasLoadedInitialData = false
     private let viewOffSet = 2
@@ -24,7 +31,7 @@ final class MealProgramsViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     @Published var searchText: String = ""
     @Published var isSearching: Bool = false
-    @Published private(set) var filteredMealPrograms: [MealProgram] = []
+    @Published var filteredMealPrograms: [MealProgram] = []
     @Published var shouldSearchMeals: Bool = false
     @Published var viewState: ViewState = .loading
     @Published private(set) var visibleMealPrograms: [MealProgram] = []

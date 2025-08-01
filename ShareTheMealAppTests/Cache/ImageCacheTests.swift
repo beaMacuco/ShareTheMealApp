@@ -2,7 +2,6 @@
 //  ImageCacheTests.swift
 //  ShareTheMealAppTests
 //
-//  Created by Beatriz Loures Macuco on 29.07.25.
 //
 
 import XCTest

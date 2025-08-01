@@ -2,7 +2,6 @@
 //  CardView.swift
 //  ShareTheMealApp
 //
-//  Created by Beatriz Loures Macuco on 28.07.25.
 //
 
 import SwiftUI

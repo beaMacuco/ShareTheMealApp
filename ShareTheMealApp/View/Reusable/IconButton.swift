@@ -2,7 +2,6 @@
 //  IconButton.swift
 //  ShareTheMealApp
 //
-//  Created by Beatriz Loures Macuco on 27.07.25.
 //
 
 import SwiftUI

@@ -2,13 +2,12 @@
 //  MealProgramListView.swift
 //  ShareTheMealApp
 //
-//  Created by Beatriz Loures Macuco on 27.07.25.
 //
 
 import SwiftUI
 
-struct MealProgramListView: View {
-    @StateObject private var viewModel = MealProgramsViewModel()
+struct MealProgramListView<ViewModel: MealProgramsViewModelProtocol>: View {
+    @StateObject private var viewModel: ViewModel
     
     @ViewBuilder
     private var viewState: some View {
@@ -51,8 +50,12 @@ struct MealProgramListView: View {
             }
         }
     }
+    
+    init(viewModel: ViewModel) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
 }
 
 #Preview {
-    MealProgramListView()
+    MealProgramListView(viewModel: MealProgramsViewModel())
 }
