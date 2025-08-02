@@ -49,6 +49,7 @@
 				View/MealPrograms/MealProgramListItemView.swift,
 				View/MealPrograms/MealProgramListView.swift,
 				View/MealPrograms/ProgramProgressView.swift,
+				View/Reusable/AccessibilityIdentifiers.swift,
 				View/Reusable/BackButton.swift,
 				View/Reusable/BackButtonToolbarItem.swift,
 				View/Reusable/CardView.swift,

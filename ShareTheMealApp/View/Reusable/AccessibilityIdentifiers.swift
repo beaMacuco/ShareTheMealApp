@@ -1,0 +1,20 @@
+//
+//  AccessibilityIdentifiers.swift
+//  ShareTheMealApp
+//
+//  Created by Beatriz Loures Macuco on 03.08.25.
+//
+
+import Foundation
+
+// Accessibility ids
+struct AccessibilityIdentifiers {
+    static var mealProgramScrollView: String { "mealProgramScrollView" }
+    static var mealProgramItemView: String { "mealProgramItemView" }
+    static var overlayImageView: String {"overlayImageView" }
+    static var overlayHeaderView: String {"overlayHeaderiew" }
+    static var mealProgramDetailView: String { "mealProgramDetailView" }
+    static var mealProgramTagText: String { "mealProgramTagText" }
+    static var mealProgramAmountText: String { "mealProgramAmountText" }
+    static var mealProgramProgressPercentageText: String { "mealProgramProgressPercentageText" }
+}

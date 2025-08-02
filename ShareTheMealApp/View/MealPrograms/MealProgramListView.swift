@@ -60,9 +60,3 @@ struct MealProgramListView: View {
 #Preview {
     MealProgramListView()
 }
-
-// Accessibility ids
-struct AccessibilityIdentifiers {
-    static var mealProgramScrollView: String { "mealProgramScrollView" }
-    static var mealProgramItemView: String { "mealProgramItemView" }
-}

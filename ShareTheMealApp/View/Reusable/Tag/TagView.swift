@@ -18,6 +18,7 @@ struct TagView: View {
                 RoundedRectangle(cornerRadius: ViewSpacing.eight)
                     .fill(Color.black)
             )
+            .accessibilityIdentifier(AccessibilityIdentifiers.mealProgramTagText)
     }
 }
 

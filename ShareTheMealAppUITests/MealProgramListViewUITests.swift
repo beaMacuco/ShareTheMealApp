@@ -50,7 +50,7 @@ final class MealProgramListViewUITests: XCTestCase {
         
         firstCell.tap()
         
-        let detail = app.otherElements["MealProgramDetailView"]
+        let detail = app.otherElements[AccessibilityIdentifiers.mealProgramItemView]
         
         let exists = detail.waitForExistence(timeout: 2.0)
         

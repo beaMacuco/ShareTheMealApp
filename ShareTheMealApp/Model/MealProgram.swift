@@ -33,6 +33,10 @@ struct MealProgram: Codable, Identifiable, Hashable {
     var progressPercentageString: String {
         "\(Int(progressPercentage * 100))%"
     }
+    
+    var amounts: String {
+        "\(raisedAmount) out of \(goalAmount) \(goalAmount == 1 ? "meal" : "meals")"
+    }
 }
 
 extension MealProgram {

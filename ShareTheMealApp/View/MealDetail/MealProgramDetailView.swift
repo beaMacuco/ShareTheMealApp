@@ -36,7 +36,7 @@ struct MealProgramDetailView: View {
                 .padding(ViewSpacing.sixteen)
             }
             .accessibilityElement(children: .contain)
-            .accessibilityIdentifier("MealProgramDetailView")
+            .accessibilityIdentifier(AccessibilityIdentifiers.mealProgramItemView)
             .alert(isPresented: $viewModel.showAlert) {
                 Alert(title: Text("We have received your donation"), message: Text("Thank you for your interest :)"), dismissButton: .default(Text("OK")))
             }

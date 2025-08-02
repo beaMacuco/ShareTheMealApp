@@ -12,9 +12,11 @@ struct ProgramProgressView: View {
     var body: some View {
         ProgressView(value: mealProgram.progressPercentage) {
             HStack {
-                Text("\(mealProgram.raisedAmount) out of \(mealProgram.goalAmount) \(mealProgram.goalAmount == 1 ? "meal" : "meals")")
+                Text(mealProgram.amounts)
+                    .accessibilityIdentifier(AccessibilityIdentifiers.mealProgramAmountText)
                 Spacer()
                 Text(mealProgram.progressPercentageString)
+                    .accessibilityIdentifier(AccessibilityIdentifiers.mealProgramProgressPercentageText)
                     .foregroundStyle(.gray)
             }
             .font(.footnote)

@@ -15,10 +15,12 @@ struct OverlayHeaderImageView: View {
             image
                 .resizable()
                 .scaledToFill()
+                .accessibilityIdentifier(AccessibilityIdentifiers.overlayImageView)
             Text(title)
                 .foregroundStyle(.white)
                 .padding(ViewSpacing.four)
                 .background(.black)
+                .accessibilityIdentifier(AccessibilityIdentifiers.overlayHeaderView)
         }
     }
 }
