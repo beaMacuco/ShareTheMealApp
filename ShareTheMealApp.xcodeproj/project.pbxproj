@@ -33,7 +33,36 @@
 		4F60DB5E2E3BDCC8005869D0 /* Exceptions for "ShareTheMealApp" folder in "ShareTheMealAppUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				DependencyContainer.swift,
+				Cache/ImageCache.swift,
+				Cache/ImageLoader.swift,
+				DataRequestLayer/DataDecoder.swift,
+				DataRequestLayer/LocalJsonReader.swift,
+				DataRequestLayer/MealProgramLocalJsonReader.swift,
+				DataRequestLayer/MealProgramRequest.swift,
+				DataRequestLayer/NetworkRequest/ImageRequest.swift,
+				Model/MealProgram.swift,
+				Model/MealPrograms.swift,
+				Utilities/LocalFileReader.swift,
+				View/ContentView.swift,
+				View/MealDetail/MealProgramDetailView.swift,
+				View/MealPrograms/MealProgramCardView.swift,
+				View/MealPrograms/MealProgramListItemView.swift,
+				View/MealPrograms/MealProgramListView.swift,
+				View/MealPrograms/ProgramProgressView.swift,
+				View/Reusable/BackButton.swift,
+				View/Reusable/BackButtonToolbarItem.swift,
+				View/Reusable/CardView.swift,
+				View/Reusable/DismissButton.swift,
+				View/Reusable/DismissToolbarItem.swift,
+				View/Reusable/IconButton.swift,
+				View/Reusable/OverlayHeaderImageView.swift,
+				View/Reusable/PrimaryButton.swift,
+				View/Reusable/SFSymbols.swift,
+				View/Reusable/Tag/TagsView.swift,
+				View/Reusable/Tag/TagView.swift,
+				View/Reusable/ViewSpacing.swift,
+				ViewModel/MealProgramItemViewModel.swift,
+				ViewModel/MealProgramsViewModel.swift,
 			);
 			target = 4F6B328D2E2FF46D00054107 /* ShareTheMealAppUITests */;
 		};
@@ -50,6 +79,7 @@
 				Model/MealProgram.swift,
 				Model/MealPrograms.swift,
 				Utilities/LocalFileReader.swift,
+				View/Reusable/ViewSpacing.swift,
 				ViewModel/MealProgramItemViewModel.swift,
 				ViewModel/MealProgramsViewModel.swift,
 			);
@@ -213,6 +243,7 @@
 					};
 					4F6B328D2E2FF46D00054107 = {
 						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 4F6B32762E2FF46D00054107;
 					};
 				};
 			};
@@ -527,6 +558,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ShareTheMealApp;
 			};
 			name = Debug;
 		};
@@ -545,6 +577,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ShareTheMealApp;
 			};
 			name = Release;
 		};

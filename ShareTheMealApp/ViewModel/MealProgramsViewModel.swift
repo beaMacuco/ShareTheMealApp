@@ -12,16 +12,9 @@ enum ViewState: Equatable {
     case loading, loaded, error(String)
 }
 
-@MainActor
-protocol MealProgramsViewModelProtocol: ObservableObject {
-    var viewState: ViewState { get set }
-    var filteredMealPrograms: [MealProgram] { get set }
-    var searchText: String { get set }
-    func loadInitialDataIfNeeded() async
-    func fetchMoreIfNeeded(currentItem: MealProgram)
-}
-
-final class MealProgramsViewModel: MealProgramsViewModelProtocol {
+final class MealProgramsViewModel: ObservableObject {
+    static let searchBarPrompt: String = "Search Meal Programs"
+    static let navigationTitle: String = "Search Meal Programs"
     static let errorMessage: String = "Hey there! Something went wrong... 😬"
     private var hasLoadedInitialData = false
     private let viewOffSet = 2
@@ -38,10 +31,11 @@ final class MealProgramsViewModel: MealProgramsViewModelProtocol {
     
     init(mealProgramRequest: MealProgramRequestable = MealProgramRequest()) {
         self.mealProgramRequest = mealProgramRequest
-        addObservers()
     }
     
+    @MainActor
     func loadInitialDataIfNeeded() async {
+        addObservers()
         guard !hasLoadedInitialData else {
             return
         }
@@ -49,6 +43,7 @@ final class MealProgramsViewModel: MealProgramsViewModelProtocol {
         hasLoadedInitialData = true
     }
     
+    @MainActor
     private func loadInitialData() async {
         do {
             try await mealProgramRequest.loadMealPrograms()
@@ -66,6 +61,7 @@ final class MealProgramsViewModel: MealProgramsViewModelProtocol {
         }
     }
     
+    @MainActor
     private func addObservers() {
         $searchText
             .dropFirst()
@@ -80,6 +76,7 @@ final class MealProgramsViewModel: MealProgramsViewModelProtocol {
             .store(in: &cancellables)
     }
     
+    @MainActor
     private func applySearchFilter() {
         if searchText.isEmpty {
             filteredMealPrograms = visibleMealPrograms

@@ -6,8 +6,8 @@
 
 import SwiftUI
 
-struct MealProgramListView<ViewModel: MealProgramsViewModelProtocol>: View {
-    @StateObject private var viewModel: ViewModel
+struct MealProgramListView: View {
+    @StateObject private var viewModel: MealProgramsViewModel
     
     @ViewBuilder
     private var viewState: some View {
@@ -27,35 +27,42 @@ struct MealProgramListView<ViewModel: MealProgramsViewModelProtocol>: View {
             LazyVStack {
                 ForEach(viewModel.filteredMealPrograms, id: \.self) { item in
                     MealProgramListItemView(mealProgram: item)
+                        .accessibilityIdentifier(AccessibilityIdentifiers.mealProgramItemView)
                         .task(id: item.id) {
                             viewModel.fetchMoreIfNeeded(currentItem: item)
                         }
                 }
             }
         }
-        .searchable(text: $viewModel.searchText)
+        .accessibilityIdentifier(AccessibilityIdentifiers.mealProgramScrollView)
+        .searchable(text: $viewModel.searchText, prompt: MealProgramsViewModel.searchBarPrompt)
     }
     
     var body: some View {
         NavigationStack {
             ZStack {
                 mealProgramList
-                .opacity(viewModel.viewState == .loaded ? ViewOpacity.one : ViewOpacity.zero)
-    
+                    .opacity(viewModel.viewState == .loaded ? ViewOpacity.one : ViewOpacity.zero)
                 viewState
             }
-            .navigationTitle("Meal Programs")
+            .navigationTitle(MealProgramsViewModel.navigationTitle)
             .task {
                 await viewModel.loadInitialDataIfNeeded()
             }
         }
     }
     
-    init(viewModel: ViewModel) {
+    init(viewModel: MealProgramsViewModel = MealProgramsViewModel()) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
 }
 
 #Preview {
-    MealProgramListView(viewModel: MealProgramsViewModel())
+    MealProgramListView()
+}
+
+// Accessibility ids
+struct AccessibilityIdentifiers {
+    static var mealProgramScrollView: String { "mealProgramScrollView" }
+    static var mealProgramItemView: String { "mealProgramItemView" }
 }

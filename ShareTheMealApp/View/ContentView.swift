@@ -5,15 +5,10 @@
 //
 
 import SwiftUI
-
 struct ContentView: View {
-    private let dependencyContainer: DependencyContainer = .shared
     
     var body: some View {
-        MealProgramListView(viewModel: dependencyContainer.mealProgramsViewModel)
+        MealProgramListView(viewModel: MealProgramsViewModel())
     }
 }
 
-#Preview {
-    ContentView()
-}
