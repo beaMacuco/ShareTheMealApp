@@ -19,3 +19,7 @@ I used a classic MVVM reactive approach. Both the Network Layer (JSON file in th
 ## Trade offs:
 - Due to times constraints I did not test all classes but I tested the majority of them (both UI and regular unit tests).
 - If i had more time I would add an animation, like in the main app to show the inline navbar when the user scrolls passed the image, to **MealProgramDetailView**.
+
+## Video:
+https://github.com/user-attachments/assets/3a1051bb-86dc-4b02-af51-51e71acaed72
+
