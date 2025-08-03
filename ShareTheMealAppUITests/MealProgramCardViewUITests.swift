@@ -2,7 +2,6 @@
 //  MealProgramCardViewUITests.swift
 //  ShareTheMealAppUITests
 //
-//  Created by Beatriz Loures Macuco on 03.08.25.
 //
 
 import XCTest

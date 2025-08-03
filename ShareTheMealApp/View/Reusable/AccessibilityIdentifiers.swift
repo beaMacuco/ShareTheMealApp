@@ -2,7 +2,6 @@
 //  AccessibilityIdentifiers.swift
 //  ShareTheMealApp
 //
-//  Created by Beatriz Loures Macuco on 03.08.25.
 //
 
 import Foundation
