@@ -31,7 +31,7 @@ final class MealProgramListViewUITests: XCTestCase {
         XCTAssertTrue(searchBarElement.exists)
     }
     
-    func testSearchBarSearchesFiltersListForGivenText() {
+    func testSearchBarSearchesFiltersListForGivenTextAndReturnsEmptyListWhenItDoesntFindIt() {
         let expected = "Lorem"
         let searchBarElement = app.searchFields[MealProgramsViewModel.searchBarPrompt]
         searchBarElement.tap()
@@ -44,9 +44,24 @@ final class MealProgramListViewUITests: XCTestCase {
         XCTAssertFalse(exists)
     }
     
+    func testSearchBarSearchesFiltersListForGivenTextAndReturnsCell() {
+        // In a real scenario I would inject a JSON mock to make sure this title never changes, but for the sake of brevity I just did it like this.
+        let expected = "Pastoral Communities Kenya"
+        let searchBarElement = app.searchFields[MealProgramsViewModel.searchBarPrompt]
+        searchBarElement.tap()
+        searchBarElement.typeText(expected)
+        let scrollView = app.scrollViews[AccessibilityIdentifiers.mealProgramScrollView]
+        let filteredCell = scrollView.staticTexts[expected]
+        
+        let exists = filteredCell.waitForExistence(timeout: 2.0)
+        
+        XCTAssertTrue(exists)
+    }
+    
     func testTappingOnItemNavigatesToSubview() {
         let scrollview = app.scrollViews[AccessibilityIdentifiers.mealProgramScrollView]
-        let firstCell = scrollview.buttons.matching(identifier: AccessibilityIdentifiers.mealProgramItemView).firstMatch
+        // In a real scenario I would inject a JSON mock to make sure this title never changes, but for the sake of brevity I just did it like this.
+        let firstCell = scrollview.buttons.matching(identifier: "\(AccessibilityIdentifiers.mealProgramItemView)1").firstMatch
         
         firstCell.tap()
         

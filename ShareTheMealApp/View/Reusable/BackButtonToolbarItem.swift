@@ -12,6 +12,7 @@ struct BackToolBarItem: ToolbarContent {
     var body: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             BackButton(action: action)
+                .accessibilityIdentifier(AccessibilityIdentifiers.dismissButton)
         }
     }
  }

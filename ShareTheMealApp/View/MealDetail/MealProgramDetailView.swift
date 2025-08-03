@@ -20,9 +20,11 @@ struct MealProgramDetailView: View {
                         VStack(alignment: .leading, spacing: ViewSpacing.eight) {
                             TagsView(tags: viewModel.mealProgram.tags)
                             VStack(alignment: .leading, spacing: ViewSpacing.sixteen) {
-                                Text("Overview:")
+                                Text(MealProgramItemViewModel.summaryTitle)
                                     .font(.title3)
+                                    .accessibilityIdentifier(AccessibilityIdentifiers.summaryTitle)
                                 Text(viewModel.mealProgram.description)
+                                    .accessibilityIdentifier(AccessibilityIdentifiers.mealProgramDescription)
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
@@ -30,15 +32,16 @@ struct MealProgramDetailView: View {
                     }
                 }
                 
-                PrimaryButton(title: "Donate now") {
+                PrimaryButton(title: MealProgramItemViewModel.donateButtonTitle) {
                     viewModel.showAlert = true
                 }
+                .accessibilityIdentifier(AccessibilityIdentifiers.donateButton)
                 .padding(ViewSpacing.sixteen)
             }
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier(AccessibilityIdentifiers.mealProgramItemView)
             .alert(isPresented: $viewModel.showAlert) {
-                Alert(title: Text("We have received your donation"), message: Text("Thank you for your interest :)"), dismissButton: .default(Text("OK")))
+                Alert(title: Text(MealProgramItemViewModel.alertTitle), message: Text(MealProgramItemViewModel.alertMessage), dismissButton: .default(Text(MealProgramItemViewModel.dismissButtonTitle)))
             }
         }
         .toolbar {
@@ -56,3 +59,6 @@ struct MealProgramDetailView: View {
 #Preview {
     MealProgramDetailView(viewModel: MealProgramItemViewModel(mealProgram: MealProgram.fake()))
 }
+
+
+

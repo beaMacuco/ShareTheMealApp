@@ -1,0 +1,12 @@
+appId: bea.ShareTheMealApp
+---
+- launchApp
+- scrollUntilVisible:
+    element:
+      id: "mealProgramItemView3"
+- tapOn:
+    id: "mealProgramItemView3"
+- tapOn:
+    id: "donateButton"
+    
+        

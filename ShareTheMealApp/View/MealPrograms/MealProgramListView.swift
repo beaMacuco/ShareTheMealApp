@@ -27,13 +27,14 @@ struct MealProgramListView: View {
             LazyVStack {
                 ForEach(viewModel.filteredMealPrograms, id: \.self) { item in
                     MealProgramListItemView(mealProgram: item)
-                        .accessibilityIdentifier(AccessibilityIdentifiers.mealProgramItemView)
+                        .accessibilityIdentifier("\(AccessibilityIdentifiers.mealProgramItemView)\(item.id)")
                         .task(id: item.id) {
                             viewModel.fetchMoreIfNeeded(currentItem: item)
                         }
                 }
             }
         }
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier(AccessibilityIdentifiers.mealProgramScrollView)
         .searchable(text: $viewModel.searchText, prompt: MealProgramsViewModel.searchBarPrompt)
     }

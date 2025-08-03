@@ -8,6 +8,11 @@ import SwiftUI
 
 final class MealProgramItemViewModel: ObservableObject {
     private static let placeholderImage: String = "ImagePlaceholder"
+    static let summaryTitle: String = "Overview"
+    static let donateButtonTitle: String = "Donate"
+    static let alertTitle = "We have received your donation"
+    static let alertMessage = "Thank you for your interest :)"
+    static let dismissButtonTitle = "OK"
     private let imageLoader: ImageLoading
     let mealProgram: MealProgram
     @Published private(set) var programImage: Image

@@ -17,4 +17,8 @@ struct AccessibilityIdentifiers {
     static var mealProgramTagText: String { "mealProgramTagText" }
     static var mealProgramAmountText: String { "mealProgramAmountText" }
     static var mealProgramProgressPercentageText: String { "mealProgramProgressPercentageText" }
+    static var donateButton: String { "donateButton" }
+    static var summaryTitle: String { "summaryTitle" }
+    static var mealProgramDescription: String { "mealProgramDescription" }
+    static var dismissButton: String { "dismissButton" }
 }

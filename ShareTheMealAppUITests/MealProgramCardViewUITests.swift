@@ -17,7 +17,8 @@ class MealProgramCardViewUITests: XCTestCase {
         app.launch()
         continueAfterFailure = false
         let scrollview = app.scrollViews[AccessibilityIdentifiers.mealProgramScrollView]
-        firstCell = scrollview.buttons.matching(identifier: AccessibilityIdentifiers.mealProgramItemView).firstMatch
+        // In a real scenario I would inject a JSON mock to make sure this title never changes, but for the sake of brevity I just did it like this.
+        firstCell = scrollview.buttons.matching(identifier: "\(AccessibilityIdentifiers.mealProgramItemView)1").firstMatch
     }
     
     func testCellDisplaysMealProgramHeaderImage() {
