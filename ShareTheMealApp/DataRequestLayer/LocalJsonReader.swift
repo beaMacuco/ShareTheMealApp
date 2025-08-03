@@ -23,11 +23,13 @@ struct LocalJsonReader: DataRequestable {
         self.localFileReader = localFileReader
     }
     
+    /// Fetches and decodes json file
     func fetchItems<T: Codable>() throws -> T {
         let data = try readJsonFile()
-        return try dataDecoder.decode(from: data)
+        return try dataDecoder.decode(from: data, dateFormatter: DateFormatter.yMDDateFormatter)
     }
     
+    /// Fetches json
     private func readJsonFile() throws -> Data {
         try localFileReader.readJsonFile()
     }

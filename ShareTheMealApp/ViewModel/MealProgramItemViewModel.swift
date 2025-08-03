@@ -6,6 +6,7 @@
 
 import SwiftUI
 
+@MainActor
 final class MealProgramItemViewModel: ObservableObject {
     private static let placeholderImage: String = "ImagePlaceholder"
     static let summaryTitle: String = "Overview"
@@ -24,7 +25,6 @@ final class MealProgramItemViewModel: ObservableObject {
         self.programImage = Image(Self.placeholderImage)
     }
     
-    @MainActor
     func loadProgramImage() {
         Task {
             guard let image = await imageLoader.fetchImage(from: mealProgram.imageUrl) else {

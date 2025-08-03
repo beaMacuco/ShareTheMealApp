@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct MealProgramListView: View {
-    @StateObject private var viewModel: MealProgramsViewModel
+    @StateObject private var viewModel: MealProgramsViewModel = MealProgramsViewModel()
     
     @ViewBuilder
     private var viewState: some View {
@@ -51,10 +51,6 @@ struct MealProgramListView: View {
                 await viewModel.loadInitialDataIfNeeded()
             }
         }
-    }
-    
-    init(viewModel: MealProgramsViewModel = MealProgramsViewModel()) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
     }
 }
 

@@ -18,6 +18,7 @@ struct LocalFileReader: LocalFileReadable {
     let fileName: String
     let fileType: String
     
+    /// Reads local json file throws error if not found
     func readJsonFile() throws -> Data {
         guard let filePath = Bundle.main.path(forResource: fileName, ofType: fileType) else {
             throw LocalFileReaderError.fileNotFound

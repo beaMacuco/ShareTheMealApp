@@ -11,16 +11,15 @@ enum DecodableError: Error {
 }
 
 protocol DataDecodable {
-    func decode<T: Codable>(from data: Data) throws -> T
+    func decode<T: Codable>(from data: Data, dateFormatter: DateFormatter) throws -> T
 }
 
 struct DataDecoder: DataDecodable {
     
-    func decode<T: Codable>(from data: Data) throws -> T {
+    /// A generic data decoder for codable objects that formats the date.
+    func decode<T: Codable>(from data: Data, dateFormatter: DateFormatter) throws -> T {
         let decoder = JSONDecoder()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        decoder.dateDecodingStrategy = .formatted(formatter)
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
         
         var decodeResponse: T
 

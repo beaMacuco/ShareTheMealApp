@@ -7,6 +7,7 @@
 import XCTest
 @testable import ShareTheMealApp
 
+@MainActor
 final class MealProgramListViewUITests: XCTestCase {
     var app: XCUIApplication!
     

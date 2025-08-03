@@ -11,7 +11,9 @@ final class MealProgramLocalJsonReaderTests: XCTestCase {
     
     func testLoadProgramFetchesItems() {
         do {
-            let mock = DataRequestableMock()
+            var mock = DataRequestableMock()
+            let mealProgram = MealProgram.fake()
+            mock.mealPrograms = MealPrograms(programs: [mealProgram])
             let sut = MealProgramLocalJsonReader(dataRequestable: mock)
             try sut.loadPrograms()
             XCTAssertFalse(sut.mealPrograms.isEmpty)

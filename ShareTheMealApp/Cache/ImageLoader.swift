@@ -19,15 +19,15 @@ final class ImageLoader: ImageLoading {
         self.imageRequest = imageRequest
     }
     
+    /// Try to fetch image from cache before fetching it from remote
     func fetchImage(from reference: String) async -> Image? {
         guard let uiImage = cache.fetch(reference: reference) else {
-            print("from remote", reference)
             return await fetchRemoteImage(from: reference)
         }
-        print("from cache", reference)
         return Image(uiImage: uiImage)
     }
     
+    /// Fetches images from remote and caches them locally.
     private func fetchRemoteImage(from reference: String) async -> Image? {
         var image: Image?
         do {

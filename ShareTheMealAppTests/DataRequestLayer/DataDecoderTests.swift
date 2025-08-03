@@ -19,15 +19,15 @@ final class DataDecoderTests: XCTestCase {
         let codableMock = CodableMock.make()
         let expected = codableMock.id
         let data = try JSONEncoder().encode(codableMock)
-        let mock: CodableMock = try sut.decode(from: data)
+        let mock: CodableMock = try sut.decode(from: data, dateFormatter: DateFormatter.yMDDateFormatter)
         
         XCTAssertEqual(expected, mock.id)
     }
     
-    func test_GivenUnDecodableData_WhenDecoded_ThenObjectIsReturned() throws {
+    func test_GivenUnDecodableData_WhenDecoded_ThenErrorIsThrown() throws {
         let data = try JSONEncoder().encode("tandomString")
         do {
-            _ = try sut.decode(from: data) as CodableMock
+            _ = try sut.decode(from: data, dateFormatter: DateFormatter.yMDDateFormatter) as CodableMock
             XCTFail("Should have thrown decoding error")
         } catch {
             XCTAssertTrue(true)

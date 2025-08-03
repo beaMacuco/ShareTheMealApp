@@ -26,6 +26,7 @@ final class ImageRequest: ImageRequesting {
         self.urlSession = urlSession
     }
     
+    /// Fetch image from remote throw errors if it fails.
     func fetchImage(urlString: String) async throws -> Data {
         guard let url = URL(string: urlString) else {
             throw NetworkError.malformedUrl

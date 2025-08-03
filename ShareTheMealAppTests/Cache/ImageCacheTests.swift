@@ -17,7 +17,7 @@ class ImageCacheTests: XCTestCase {
         sut = ImageCache(cache: cache)
     }
     
-    func test_ImageCacheRetrieveImageFromCache() {
+    func test_ImageCacheRetrievesImageFromCache() {
         let reference = "1234"
         let expected = UIImage()
         cache.setObject(expected, forKey: (reference as NSString))

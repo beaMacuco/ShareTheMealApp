@@ -12,6 +12,7 @@ enum ViewState: Equatable {
     case loading, loaded, error(String)
 }
 
+@MainActor
 final class MealProgramsViewModel: ObservableObject {
     static let searchBarPrompt: String = "Search Meal Programs"
     static let navigationTitle: String = "Search Meal Programs"
@@ -23,19 +24,17 @@ final class MealProgramsViewModel: ObservableObject {
     let mealProgramRequest: MealProgramRequestable
     private var cancellables = Set<AnyCancellable>()
     @Published var searchText: String = ""
-    @Published var isSearching: Bool = false
-    @Published var filteredMealPrograms: [MealProgram] = []
-    @Published var shouldSearchMeals: Bool = false
-    @Published var viewState: ViewState = .loading
+    @Published private(set) var filteredMealPrograms: [MealProgram] = []
     @Published private(set) var visibleMealPrograms: [MealProgram] = []
+    @Published var viewState: ViewState = .loading
     
     init(mealProgramRequest: MealProgramRequestable = MealProgramRequest()) {
         self.mealProgramRequest = mealProgramRequest
+        addObservers()
     }
     
-    @MainActor
+    /// Makes sure data is only loaded once.
     func loadInitialDataIfNeeded() async {
-        addObservers()
         guard !hasLoadedInitialData else {
             return
         }
@@ -43,7 +42,8 @@ final class MealProgramsViewModel: ObservableObject {
         hasLoadedInitialData = true
     }
     
-    @MainActor
+    /// Loads meal programs and sets initial variables.
+    /// Chages the view state to either loaded or error with message.
     private func loadInitialData() async {
         do {
             try await mealProgramRequest.loadMealPrograms()
@@ -61,7 +61,7 @@ final class MealProgramsViewModel: ObservableObject {
         }
     }
     
-    @MainActor
+    /// Adds combine observers
     private func addObservers() {
         $searchText
             .dropFirst()
@@ -76,7 +76,7 @@ final class MealProgramsViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    @MainActor
+    /// Concentrates filters into one single place taking both for search text and visible programs into account every time.
     private func applySearchFilter() {
         if searchText.isEmpty {
             filteredMealPrograms = visibleMealPrograms
@@ -85,6 +85,7 @@ final class MealProgramsViewModel: ObservableObject {
         }
     }
     
+    /// Sets up pagination logic for fetching data lazily.
     func fetchMoreIfNeeded(currentItem: MealProgram) {
         guard shouldFetchMore(currentItem: currentItem) else {
             return
@@ -95,6 +96,8 @@ final class MealProgramsViewModel: ObservableObject {
         offset += newItems.count
     }
     
+    /// Checks if there is a need to fetch more based on the currently created item.
+    /// Defers fetch if it is already fetching.
     private func shouldFetchMore(currentItem: MealProgram) -> Bool {
         guard isFetching == false else {
             return false
